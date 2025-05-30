@@ -26,14 +26,29 @@ export default StyleSheet.create({
     fontFamily: FONT_RICK_AND_MORTY,
   },
   searchInput: {
-    backgroundColor: colors.cor.cinza,
-    padding: 10,
-    borderRadius: 8,
+    backgroundColor: colors.cor.roxo,
+    paddingVertical: 12,
+    paddingHorizontal: 20, // mais espaçamento lateral
+    borderRadius: 16, // mais arredondado
     marginBottom: 16,
     color: colors.cor.branco,
     fontFamily: FONT_RICK_AND_MORTY,
     borderWidth: 1,
-    borderColor: colors.cor.azul,
+    borderColor: colors.cor.branco,
+    fontSize: 18,
+    flex: 1,
+    height: 48,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4, // sombra Android
+  },
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+    gap: 8, // se não funcionar, use marginRight no input ou marginLeft no ícone
   },
   row: {
     justifyContent: "space-between",
@@ -68,5 +83,28 @@ export default StyleSheet.create({
     color: colors.cor.cinza,
     textAlign: "center",
     fontFamily: FONT_RICK_AND_MORTY,
+  },
+
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  favoriteIcon: {
+    color: colors.cor.branco,
+    backgroundColor: colors.cor.azul,
+    borderRadius: 8,
+    padding: 8,
+    marginLeft: 5,
+    alignSelf: "center",
+    borderColor: colors.cor.branco,
+    borderWidth: 1,
+    height: 48, // igual ao input
+    width: 48, // largura igual para manter proporção
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    marginBottom: 16,
   },
 });
