@@ -1,21 +1,20 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../styles/colors";
+import { colors } from "../styles/colors";
 
-//Defina o nome da fonte que você usou como chave no Font.loadAsync
 const FONT_RICK_AND_MORTY = "fonteRickAndMorty";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.cor.preto,
-    padding: 16,
+    paddingHorizontal: 8, // adicionado padding lateral pequeno
   },
   loadingText: {
     marginTop: 10,
     fontSize: 16,
     color: colors.cor.branco,
     textAlign: "center",
-    fontFamily: FONT_RICK_AND_MORTY, // Aplicando a fonte
+    fontFamily: FONT_RICK_AND_MORTY,
   },
   title: {
     fontSize: 30,
@@ -28,8 +27,8 @@ export default StyleSheet.create({
   searchInput: {
     backgroundColor: colors.cor.verdeE,
     paddingVertical: 12,
-    paddingHorizontal: 20, // mais espaçamento lateral
-    borderRadius: 16, // mais arredondado
+    paddingHorizontal: 20,
+    borderRadius: 16,
     marginBottom: 16,
     color: colors.cor.branco,
     fontFamily: FONT_RICK_AND_MORTY,
@@ -42,38 +41,43 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    elevation: 4, // sombra Android
+    elevation: 4,
   },
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 16,
-    gap: 8, // se não funcionar, use marginRight no input ou marginLeft no ícone
+    marginBottom: 15,
+    gap: 8,
   },
   row: {
     justifyContent: "space-between",
   },
   card: {
     backgroundColor: colors.cor.verdeE,
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 12,
-    flex: 0.48,
+    borderRadius: 12, // aumentado para ficar mais arredondado
+    padding: 12, // aumentado padding interno
+    marginBottom: 8, // aumentado espaçamento entre cards
+    flex: 0.485,
     alignItems: "center",
     borderColor: colors.cor.azul,
     borderWidth: 1,
+    shadowColor: colors.cor.azul,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5, // adicionado sombra para destacar os cards
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderColor: colors.cor.cinza,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    borderColor: colors.cor.azul,
     borderWidth: 2,
+    marginBottom: 4, // adicionado espaço abaixo da imagem
   },
   name: {
     marginTop: 8,
     fontSize: 16,
-
     color: colors.cor.branco,
     textAlign: "center",
     fontFamily: FONT_RICK_AND_MORTY,
@@ -83,28 +87,5 @@ export default StyleSheet.create({
     color: colors.cor.cinza,
     textAlign: "center",
     fontFamily: FONT_RICK_AND_MORTY,
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  favoriteIcon: {
-    color: colors.cor.branco,
-    backgroundColor: colors.cor.azul,
-    borderRadius: 8,
-    padding: 8,
-    marginLeft: 5,
-    alignSelf: "center",
-    borderColor: colors.cor.branco,
-    borderWidth: 1,
-    height: 48, // igual ao input
-    width: 48, // largura igual para manter proporção
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    marginBottom: 16,
   },
 });

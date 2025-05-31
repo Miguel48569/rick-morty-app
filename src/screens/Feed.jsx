@@ -3,19 +3,21 @@ import {
   View,
   Text,
   FlatList,
-  Image,
   ActivityIndicator,
   TextInput,
-  StyleSheet,
+  Image,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Font from "expo-font";
-import styles from "../app/home/styles"; // Corrigido o caminho
-import { getCharacters } from "../services/rickAndMorty"; // Corrigido o caminho
+import { useNavigation } from "@react-navigation/native";
+import styles from "./stylesFeed";
+import { getCharacters } from "../services/rickAndMorty";
+import CharacterCard from "./CharacterCard";
 
 const FONT_KEY_RICK_AND_MORTY = "fonteRickAndMorty";
 
-const initialLoadingStyles = StyleSheet.create({
+const initialLoadingStyles = {
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
@@ -27,7 +29,7 @@ const initialLoadingStyles = StyleSheet.create({
     fontSize: 16,
     color: "#FFFFFF",
   },
-});
+};
 
 export default function Feed() {
   const [characters, setCharacters] = useState([]);
@@ -35,7 +37,8 @@ export default function Feed() {
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState("Carregando fonte...");
-  const [error, setError] = useState(null); // Novo estado para erro
+  const [error, setError] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function loadInitialData() {
@@ -93,9 +96,12 @@ export default function Feed() {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView
+      style={[styles.container, { paddingBottom: 0, paddingTop: 0 }]}
+      edges={["top", "bottom"]}
+    >
       <Text style={styles.title}>Rick and Morty</Text>
-      <View style={styles.searchRow}>
+      <View style={[styles.searchRow, { marginBottom: 8 }]}>
         <TextInput
           style={styles.searchInput}
           placeholder="Pesquisar personagem..."
@@ -104,23 +110,44 @@ export default function Feed() {
           onChangeText={handleSearch}
         />
       </View>
-      {filteredCharacters.length > 0 ? (
-        <FlatList
-          data={filteredCharacters}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={2}
-          columnWrapperStyle={styles.row}
-          renderItem={({ item }) => (
-            <View style={styles.card}>
-              <Image source={{ uri: item.image }} style={styles.image} />
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.species}>{item.species}</Text>
-            </View>
-          )}
-        />
-      ) : (
-        <Text style={styles.loadingText}>Nenhum personagem encontrado.</Text>
-      )}
+      <FlatList
+        data={filteredCharacters}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.species}>{item.species}</Text>
+            <TouchableOpacity
+              style={{
+                marginTop: 8,
+                backgroundColor: "#2980B9",
+                borderRadius: 8,
+                paddingVertical: 6,
+                paddingHorizontal: 16,
+                alignSelf: "center",
+              }}
+              onPress={() =>
+                navigation.navigate("Description", { id: item.id })
+              }
+            >
+              <Text
+                style={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}
+              >
+                Detalhes
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        contentContainerStyle={{ paddingBottom: 0, paddingTop: 0 }}
+        style={{ flex: 2, marginBottom: 0, marginTop: 0 }}
+      />
     </SafeAreaView>
   );
 }

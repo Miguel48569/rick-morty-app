@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
-import Feed from "../screens/Feed";
-import New from "../screens/New";
+import StackRoutes from "./stack.routes";
+import FavoriteStackRoutes from "./favorites.stack.routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,8 +22,8 @@ export default function TabRoutes() {
       }}
     >
       <Tab.Screen
-        name="Feed"
-        component={Feed}
+        name="FeedTab"
+        component={StackRoutes}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="home" size={size} color={color} />
@@ -32,8 +32,8 @@ export default function TabRoutes() {
         }}
       />
       <Tab.Screen
-        name="New"
-        component={New}
+        name="FavoriteTab"
+        component={FavoriteStackRoutes}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="heart" size={size} color={color} />
